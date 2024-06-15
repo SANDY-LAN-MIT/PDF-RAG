@@ -4,7 +4,7 @@ from langchain.memory import ConversationBufferMemory
 from utils import qa_agent
 
 
-st.title("📑 AI智能PDF问答工具")
+st.title("📑 3DLan知识库问答")
 
 with st.sidebar:
     openai_api_key = st.text_input("请输入OpenAI API密钥：", type="password")
@@ -17,14 +17,14 @@ if "memory" not in st.session_state:
         output_key="answer"
     )
 
-uploaded_file = st.file_uploader("上传你的PDF文件：", type="pdf")
+uploaded_file = st.file_uploader("上传你的PDF知识库：", type="pdf")
 question = st.text_input("对PDF的内容进行提问", disabled=not uploaded_file)
 
 if uploaded_file and question and not openai_api_key:
     st.info("请输入你的OpenAI API密钥")
 
 if uploaded_file and question and openai_api_key:
-    with st.spinner("AI正在努力思考中，请稍等..."):
+    with st.spinner("3D蓝正在努力思考中，请稍等..."):
         response = qa_agent(openai_api_key, st.session_state["memory"],
                             uploaded_file, question)
     st.write("### 答案")
